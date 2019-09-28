@@ -1,15 +1,5 @@
 #include "Wrapper.h"
 
-//int SimpleFunction()
-//{
-//	return 0;
-//}
-
-//PLUGIN_API void SetUpLoadPos(void(*action)(float x, float y, float z))
-//{
-//	actionCall = action;
-//}
-
 PLUGIN_API FileManager* CreateManager()
 {
 	return new FileManager();

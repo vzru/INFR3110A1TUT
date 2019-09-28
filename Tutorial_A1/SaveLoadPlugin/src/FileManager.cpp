@@ -4,41 +4,6 @@ FileManager::FileManager()
 {
 }
 
-//void FileManager::Save(float x, float y, float z)
-//{
-//	std::ofstream file("player_data.txt");
-//	
-//	if (file.is_open())
-//	{
-//		file.clear();
-//		file << std::to_string(x) << "\n" << std::to_string(y) << "\n" << std::to_string(z);
-//		file.close();
-//	}
-//}
-//
-//void FileManager::Load()
-//{
-//	std::string line;
-//	std::string::size_type sz;
-//	std::ifstream file("player_data.text");
-//
-//	if (file.is_open())
-//	{
-//		float x, y, z;
-//		std::getline(file, line);
-//		x = std::stof(line, &sz);
-//		std::getline(file, line);
-//		y = std::stof(line, &sz);
-//		std::getline(file, line);
-//		z = std::stof(line, &sz);
-//
-//		actionCall(x, y, z);
-//
-//		file.close();
-//	}
-//		
-//}
-
 void FileManager::Save(float x, float y, float z)
 {
 	std::ofstream file("player_data.txt");
@@ -49,7 +14,7 @@ void FileManager::Save(float x, float y, float z)
 		file << std::to_string(x) << "\n" << std::to_string(y) << "\n" << std::to_string(z);
 		file.close();
 	}
-} // I didn't know how to link it into the key press
+}
 
 void FileManager::Load()
 {
@@ -101,8 +66,3 @@ void FileManager::SetZ(float z)
 {
 	_z = z;
 }
-
-//PLUGIN_API void SetUpLoadPos(void(*action)(float x, float y, float z))
-//{
-//	actionCall = action;
-//}
