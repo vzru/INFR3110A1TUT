@@ -6,6 +6,10 @@ using System;
 
 public class FileManager_Plugin : MonoBehaviour
 {
+    public Transform playerTransform;
+    public Rigidbody playerBody;
+    public float moveSpeed = 5.0f;
+
     const string DLL_NAME = "SaveLoadPlugin";
 
     //[DllImport(DLL_NAME)]
@@ -42,33 +46,48 @@ public class FileManager_Plugin : MonoBehaviour
     void Start()
     {
         SaveManager = CreateManager();
+        playerTransform = this.GetComponent<Transform>();
+        playerBody = this.GetComponent<Rigidbody>();
         //SetUpLoadPos(Call);
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log(transform.position);
+        if(Input.GetKey(KeyCode.W))
+        {
+            playerBody.velocity = new Vector3(moveSpeed, 0, 0);
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            playerBody.velocity = new Vector3(-moveSpeed, 0, 0);
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            playerBody.velocity = new Vector3(0, 0, moveSpeed);
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            playerBody.velocity = new Vector3(0, 0, -moveSpeed);
+        }
         if (Input.GetKeyDown(KeyCode.I))
         {
-            Save(this.transform.position.x, this.transform.position.y, this.transform.position.z, SaveManager);
-            Debug.Log(this.transform.position);
+            Save(playerTransform.position.x, playerTransform.position.y, playerTransform.position.z, SaveManager);
+            Debug.Log(playerTransform.position);
         }
         if (Input.GetKeyDown(KeyCode.O))
         {
             Load(SaveManager);
-            //Debug.Log(LoadInt());
             float _x = GetXPos(SaveManager);
             float _y = GetYPos(SaveManager);
             float _z = GetZPos(SaveManager);
 
-            Debug.Log(_x);
-            Debug.Log(this.transform.position);
-            Debug.Log(_y);
-            Debug.Log(_z);
+            Debug.Log("X:" + _x);
+            Debug.Log("Y:" + _y);
+            Debug.Log("Z:" + _z);
             // 1,2,3 is the initial values so they never got changes from the read file
 
-            this.transform.position = new Vector3(_x, _y, _z); // ya it's weird
+            playerTransform.position = new Vector3(_x, _y, _z);
         }
     }
 }

@@ -49,45 +49,27 @@ void FileManager::Save(float x, float y, float z)
 		file << std::to_string(x) << "\n" << std::to_string(y) << "\n" << std::to_string(z);
 		file.close();
 	}
-}
+} // I didn't know how to link it into the key press
 
 void FileManager::Load()
 {
 	std::string line;
-	//std::string::size_type sz;
-	std::ifstream file("player_data.text");
+	std::ifstream file("player_data.txt"); // always copy paste...
 
 	if (file.is_open())
 	{
-		std::getline(file, line);
-		//SetX(std::stof(line));
-		_x = std::stof(line);
 
 		std::getline(file, line);
-		//SetY(std::stof(line));
-		_y = std::stof(line);
+		SetX(std::stof(line));
 
 		std::getline(file, line);
-		//SetZ(std::stof(line));
-		_z = std::stof(line);
+		SetY(std::stof(line));
 
+		std::getline(file, line);
+		SetZ(std::stof(line));
 
 		file.close();
 	}
-}
-
-int FileManager::LoadInt()
-{
-	std::string line;
-	std::ifstream file("player_data.text");
-
-	if (file.is_open())
-	{
-		file.read(reinterpret_cast<char*>(&_x), sizeof(_x));
-
-		file.close();
-	}
-	return (int)_x;
 }
 
 float FileManager::GetX()
@@ -119,8 +101,6 @@ void FileManager::SetZ(float z)
 {
 	_z = z;
 }
-
-
 
 //PLUGIN_API void SetUpLoadPos(void(*action)(float x, float y, float z))
 //{
